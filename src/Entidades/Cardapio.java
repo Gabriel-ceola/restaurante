@@ -24,7 +24,7 @@ public class Cardapio {
 		return preco;
 	}
 
-	public Integer getId() {
+	public Integer getId(Integer n) {
 		return id;
 	}
 

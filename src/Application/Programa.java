@@ -30,7 +30,7 @@ public class Programa {
 
 	}
 
-	private static void criarClientes() {
+	public static void criarClientes() {
 
 		Clientes clientes = new Clientes("Gabriel");
 		filaCliente.add(clientes);
@@ -49,7 +49,7 @@ public class Programa {
 
 	}
 
-	private static void criarCardapio() {
+	public static void criarCardapio() {
 
 		Cardapio cardapio = new Cardapio("Batata Frita", 15.00, 1);
 		listaCardapio.add(cardapio);
@@ -73,7 +73,7 @@ public class Programa {
 		listaCardapio.add(cardapio);
 	}
 
-	private static void criarChocolates() {
+	public static void criarChocolates() {
 
 		Chocolate chocolate = new Chocolate("Lacta");
 		pilhaChocolate.add(chocolate);
@@ -98,38 +98,28 @@ public class Programa {
 
 	}
 
-	private static void pedidos() {
+	public static void pedidos() {
 
-		for (Cardapio card : listaCardapio) {
-			for (Clientes cli : filaCliente) {
-				System.out.println("Faça seu pedido, " + cli.getName());
-				System.out.println();
-				System.out.println("Qual prato irá escolher? Insira o ID do prato");
-				System.out.println();
-				System.out.println(listaCardapio.toString());
-				int n = sc.nextInt();
-				System.out.println("Quantos unidades?");
-				int quantidadePrato = sc.nextInt();
-				if (n == card.getId()) {
-					String prato = card.getProduto();
-					double preco = card.getPreco();
-					int id = card.getId();
-					double valor = preco * quantidadePrato;
-
-					Comanda comanda = new Comanda(prato, valor);
-				}
-			}
+		Cardapio card = new Cardapio();
+		for (Clientes clientes : filaCliente) {
+			System.out.println("Faça seu pedido, " + clientes.getName());
+			System.out.println();
+			System.out.println("Qual prato irá escolher? Insira o ID do prato");
+			System.out.println();
+			System.out.println(listaCardapio.toString());
+			int n = sc.nextInt();
+			Integer numeroPrato = card.getId(n);
+			System.out.println("Quantos unidades?");
+			int quantidadePrato = sc.nextInt();
+			Comanda comanda = new Comanda(numeroPrato, quantidadePrato);
 		}
+
 	}
 
-	private static void fatura() {
-		for (Chocolate choco : pilhaChocolate) {
-			for (Comanda comand : list) {
-				for (Clientes clientes : filaCliente) {
-					System.out.println("Prato escolhido por " + clientes.getName() + comand.getPrato() + "R$"
-							+ comand.getValor() + ", chocolate sorteado: " + choco.getMarca());
-				}
-			}
+	public static void fatura() {
+		for (Comanda comand : list) {
+			System.out.println("teste1");
 		}
+		sc.close();
 	}
 }
