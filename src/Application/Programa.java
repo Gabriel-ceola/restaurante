@@ -1,10 +1,10 @@
 package Application;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-import java.util.Scanner;
 import java.util.Stack;
 
 import Entidades.Cardapio;
@@ -14,38 +14,34 @@ import Entidades.Comanda;
 
 public class Programa {
 
-	private static Scanner sc = new Scanner(System.in);
 	private static Queue<Clientes> filaCliente = new LinkedList<>();
 	private static ArrayList<Cardapio> listaCardapio = new ArrayList<>();
 	private static Stack<Chocolate> pilhaChocolate = new Stack<>();
 	private static List<Comanda> list = new ArrayList<>();
+
+	Comanda comand;
 
 	public static void main(String[] args) {
 
 		criarClientes();
 		criarCardapio();
 		criarChocolates();
-		pedidos();
-		fatura();
+		pedidos(filaCliente, pilhaChocolate, listaCardapio);
 
 	}
 
 	public static void criarClientes() {
 
-		Clientes clientes = new Clientes("Gabriel");
-		filaCliente.add(clientes);
-		clientes = new Clientes("Arthur");
-		filaCliente.add(clientes);
-		clientes = new Clientes("Elenilton");
-		filaCliente.add(clientes);
-		clientes = new Clientes("Guilherme");
-		filaCliente.add(clientes);
-		clientes = new Clientes("Karol");
-		filaCliente.add(clientes);
-		clientes = new Clientes("João");
-		filaCliente.add(clientes);
-		clientes = new Clientes("Gustavo");
-		filaCliente.add(clientes);
+		Clientes gabriel = new Clientes("Gabriel");
+		gabriel.pedirItem(0);
+		Clientes karol = new Clientes("Karol");
+		karol.pedirItem(1);
+		Clientes guilherme = new Clientes("Guilherme");
+		guilherme.pedirItem(2);
+		Clientes arthur = new Clientes("Arthur");
+		arthur.pedirItem(3);
+		Clientes elenilton = new Clientes("Elenilton");
+		elenilton.pedirItem(4);
 
 	}
 
@@ -57,7 +53,7 @@ public class Programa {
 		listaCardapio.add(cardapio);
 		cardapio = new Cardapio("Batata Gratinada", 17.00, 3);
 		listaCardapio.add(cardapio);
-		cardapio = new Cardapio("Frango Frit0", 25.00, 4);
+		cardapio = new Cardapio("Frango Frito", 25.00, 4);
 		listaCardapio.add(cardapio);
 		cardapio = new Cardapio("Frango Empanado", 22.00, 5);
 		listaCardapio.add(cardapio);
@@ -98,28 +94,25 @@ public class Programa {
 
 	}
 
-	public static void pedidos() {
+	private static double subtotal(Clientes clienteAtual, ArrayList<Cardapio> cardapio) {
+		ArrayList<Integer> comanda = clienteAtual.getComanda();
 
-		Cardapio card = new Cardapio();
-		for (Clientes clientes : filaCliente) {
-			System.out.println("Faça seu pedido, " + clientes.getName());
-			System.out.println();
-			System.out.println("Qual prato irá escolher? Insira o ID do prato");
-			System.out.println();
-			System.out.println(listaCardapio.toString());
-			int n = sc.nextInt();
-			Integer numeroPrato = card.getId(n);
-			System.out.println("Quantos unidades?");
-			int quantidadePrato = sc.nextInt();
-			Comanda comanda = new Comanda(numeroPrato, quantidadePrato);
+		double totalPedido = 0.0;
+
+		for (int i = 0; i < comanda.size(); i++) {
+			int pedidoId = comanda.get(i);
+			totalPedido += cardapio.get(pedidoId).getPreco(pedidoId);
 		}
 
+		return totalPedido;
 	}
 
-	public static void fatura() {
-		for (Comanda comand : list) {
-			System.out.println("teste1");
+	public static void pedidos(Queue<Clientes> fila, Stack<Chocolate> pilhaChocolate, ArrayList<Cardapio> cardapio) {
+		for (int i = filaCliente.size(); i < 0; i--) {
+			filaCliente.peek().chocolate = pilhaChocolate.peek();
+			System.out.println(filaCliente.element().getName() + "total: R$" + subtotal(filaCliente.element(), cardapio)
+					+ "ganhou o chocolate " + fila.element().chocolate);
 		}
-		sc.close();
 	}
+
 }

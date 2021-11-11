@@ -2,29 +2,25 @@ package Entidades;
 
 public class Comanda extends Cardapio {
 
-	protected Integer prato;
+	private String nome;
 	private Integer quantidadePrato;
 
 	public Comanda() {
 
 	}
 
-	public Comanda(Integer prato, Integer quantidadePrato) {
+	public Comanda(Double preco, Integer quantidadePrato) {
 		super();
-		this.prato = prato;
 		this.quantidadePrato = quantidadePrato;
 	}
 
-	public Integer getPrato() {
-		return prato;
+	public Comanda(String nome, String produto, Double precoPrato, Integer id, Integer quantidadePrato) {
+		super(produto, precoPrato, id);
+		this.nome = nome;
+		this.quantidadePrato = quantidadePrato;
 	}
 
-	public Integer getValor() {
+	public Integer getQuantidade() {
 		return quantidadePrato;
-	}
-
-	public Double calcularTotal() {
-		getPreco();
-		return Double.valueOf(prato) * quantidadePrato;
 	}
 }
