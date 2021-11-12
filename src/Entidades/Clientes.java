@@ -28,10 +28,6 @@ public class Clientes extends Cardapio {
 		return name;
 	}
 
-	public Double totalRefeicao() {
-		return 0.0;
-	}
-
 	public void pedirItem(int id) {
 		this.comanda.add(id);
 	}

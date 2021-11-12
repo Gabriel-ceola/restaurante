@@ -1,32 +1,25 @@
 package Application;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
 import Entidades.Cardapio;
 import Entidades.Chocolate;
 import Entidades.Clientes;
-import Entidades.Comanda;
 
 public class Programa {
 
 	private static Queue<Clientes> filaCliente = new LinkedList<>();
 	private static ArrayList<Cardapio> listaCardapio = new ArrayList<>();
 	private static Stack<Chocolate> pilhaChocolate = new Stack<>();
-	private static List<Comanda> list = new ArrayList<>();
-
-	Comanda comand;
 
 	public static void main(String[] args) {
 
 		criarClientes();
 		criarCardapio();
 		criarChocolates();
-		pedidos(filaCliente, pilhaChocolate, listaCardapio);
 
 	}
 
@@ -116,5 +109,4 @@ public class Programa {
 							+ "ganhou o chocolate " + filaClientes.element().chocolate);
 		}
 	}
-
 }
