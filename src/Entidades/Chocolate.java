@@ -12,4 +12,9 @@ public class Chocolate {
 		return marca;
 	}
 
+	@Override
+	public String toString() {
+		return "Chocolate marca = " + marca + "\n";
+	}
+
 }

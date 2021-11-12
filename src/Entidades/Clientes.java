@@ -39,4 +39,9 @@ public class Clientes extends Cardapio {
 	public void ganharChocolate(Chocolate nomeChocolate) {
 		this.chocolate = nomeChocolate;
 	}
+
+	@Override
+	public String toString() {
+		return "Clientes [name=" + name + ", chocolate=" + chocolate + ", comanda=" + comanda + "]";
+	}
 }

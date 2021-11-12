@@ -3,6 +3,7 @@ package Application;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 import java.util.Stack;
 
 import Entidades.Cardapio;
@@ -11,29 +12,35 @@ import Entidades.Clientes;
 
 public class Programa {
 
-	private static Queue<Clientes> filaCliente = new LinkedList<>();
-	private static ArrayList<Cardapio> listaCardapio = new ArrayList<>();
-	private static Stack<Chocolate> pilhaChocolate = new Stack<>();
+	static Scanner sc = new Scanner(System.in);
+	static Queue<Clientes> filaCliente = new LinkedList<>();
+	static ArrayList<Cardapio> listaCardapio = new ArrayList<>();
+	static Stack<Chocolate> pilhaChocolate = new Stack<>();
 
 	public static void main(String[] args) {
 
 		criarClientes();
 		criarCardapio();
 		criarChocolates();
-
+		exibirItens();
 	}
 
 	public static void criarClientes() {
 
 		Clientes gabriel = new Clientes("Gabriel");
+		filaCliente.add(gabriel);
 		gabriel.pedirItem(0);
 		Clientes karol = new Clientes("Karol");
+		filaCliente.add(karol);
 		karol.pedirItem(1);
 		Clientes guilherme = new Clientes("Guilherme");
+		filaCliente.add(guilherme);
 		guilherme.pedirItem(2);
 		Clientes arthur = new Clientes("Arthur");
+		filaCliente.add(arthur);
 		arthur.pedirItem(3);
 		Clientes elenilton = new Clientes("Elenilton");
+		filaCliente.add(elenilton);
 		elenilton.pedirItem(4);
 
 	}
@@ -107,6 +114,24 @@ public class Programa {
 			System.out.println(
 					filaCliente.element().getName() + "total: R$" + subtotal(filaCliente.element(), listaCardapio)
 							+ "ganhou o chocolate " + filaClientes.element().chocolate);
+		}
+	}
+
+	public static void exibirItens() {
+		System.out.println("Ver lista/pilha/fila digite 1");
+		int opcao = sc.nextInt();
+		switch (opcao) {
+		case 1: {
+			for (Clientes cli : filaCliente) {
+				System.out.printf(cli.getName() + " \n");
+			}
+		}
+		case 2: {
+			System.out.println(pilhaChocolate.toString() + "\n");
+		}
+		case 3: {
+			System.out.println(listaCardapio.toString());
+		}
 		}
 	}
 }
