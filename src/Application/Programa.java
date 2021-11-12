@@ -94,24 +94,26 @@ public class Programa {
 
 	}
 
-	private static double subtotal(Clientes clienteAtual, ArrayList<Cardapio> cardapio) {
+	private static double subtotal(Clientes clienteAtual, ArrayList<Cardapio> listaCardapio) {
 		ArrayList<Integer> comanda = clienteAtual.getComanda();
 
 		double totalPedido = 0.0;
 
 		for (int i = 0; i < comanda.size(); i++) {
 			int pedidoId = comanda.get(i);
-			totalPedido += cardapio.get(pedidoId).getPreco(pedidoId);
+			totalPedido += listaCardapio.get(pedidoId).getPreco(pedidoId);
 		}
 
 		return totalPedido;
 	}
 
-	public static void pedidos(Queue<Clientes> fila, Stack<Chocolate> pilhaChocolate, ArrayList<Cardapio> cardapio) {
+	public static void pedidos(Queue<Clientes> filaClientes, Stack<Chocolate> pilhaChocolate,
+			ArrayList<Cardapio> listaCardapio) {
 		for (int i = filaCliente.size(); i < 0; i--) {
 			filaCliente.peek().chocolate = pilhaChocolate.peek();
-			System.out.println(filaCliente.element().getName() + "total: R$" + subtotal(filaCliente.element(), cardapio)
-					+ "ganhou o chocolate " + fila.element().chocolate);
+			System.out.println(
+					filaCliente.element().getName() + "total: R$" + subtotal(filaCliente.element(), listaCardapio)
+							+ "ganhou o chocolate " + filaClientes.element().chocolate);
 		}
 	}
 
